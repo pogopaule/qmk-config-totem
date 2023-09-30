@@ -13,6 +13,7 @@
 
 enum totem_layers {
     _QWERTY,
+    _NUM,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -23,7 +24,8 @@ enum totem_layers {
 // └─────────────────────────────────────────────────┘
 
 enum custom_keycodes {
-    QWERTY,
+    QWERTY = SAFE_RANGE,
+    NUM,
     LOWER,
     RAISE,
     ADJUST,
@@ -52,7 +54,7 @@ enum custom_keycodes {
 
 
 
-#define LOWER LT(_LOWER, KC_TAB)
+#define NUM LT(_NUM, KC_BSPC)
 #define RAISE LT(_RAISE, KC_ESC)
 #define ADJUST MO(_ADJUST)
 
@@ -75,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
    │    Q    │    Z    │    X    │    C    │    V    │    B    ││    N    │    M    │    ,    │    .    │    /    │    P    │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │  ESC    │  SPACE  │  TAB    ││  ENTER  │  BSPC   │  DEL    │
+                                 │  ESC    │  SPACE  │  TAB    ││  ENTER  │   NUM   │  DEL    │
                                  └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘*/
 
    [_QWERTY] = LAYOUT(
@@ -83,7 +85,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
               GUI_A,    ALT_S,    CTL_D,    SHT_F,    KC_G,      KC_H,     SHT_J,    CTL_K,    ALT_L,    GUI_S,
     KC_Q,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,      KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_P,
-                                  KC_ESC,   KC_SPC,   KC_TAB,    KC_ENT,   KC_BSPC,  KC_DEL
+                                  KC_ESC,   KC_SPC,   KC_TAB,    KC_ENT,   NUM,      KC_DEL
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌─────────────────────────────────────────────────┐
+   │ n u m                                           │      ╭╮╭╮╭╮╭╮
+   └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
+             ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
+     ╌┄┈┈───═╡    [    │    7    │    8    │    9    │    ]    ││         │         │         │         │         │
+             ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
+             │    ;    │    4    │    5    │    6    │    =    ││         │  SHIFT  │  CTRL   │   ALT   │   GUI   │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │         │    `    │    1    │    2    │    3    │    \    ││         │         │         │         │         │         │
+   └─────────┴─────────┼─────────┼─────────┼─────────┴─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │    .    │    0    │    -    ││         │         │         │
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
+
+   [_NUM] = LAYOUT(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
+              KC_LBRC,  KC_P7,    KC_P8,    KC_P9,    KC_RBRC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+              KC_SCLN,  KC_P4,    KC_P5,    KC_P6,    KC_EQL,    XXXXXXX,  MOD_RSFT, MOD_RCTL, MOD_RALT, MOD_RGUI,
+    XXXXXXX,  KC_GRV,   KC_P1,    KC_P2,    KC_P3,    KC_SLSH,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                  KC_DOT,   KC_P0,    KC_MINS,   XXXXXXX,  XXXXXXX,  XXXXXXX
  ),
 
  /*
