@@ -1,16 +1,3 @@
-/*
-                                             ▀▀▀▀▀     ▀▀▀▀▀          ▀▀█▀▀
-                                             ▄▀▀▀▄  ▄  ▄▀▀▀▄  ▄  ▄▀▀▀▄  █  ▄▀▀▀▄
-                                             █   █  █  █   █  █  █   █  █  █   █
-                                              ▀▀▀   █   ▀▀▀   █   ▀▀▀   ▀   ▀▀▀
-                                                    █      ▄▄▄█▄▄▄    █   █
-                                                    ▀      █  █  █     █▄█
-                                                  ▀▀▀▀▀    █  █  █      ▀
-                                                           ▀  ▀  ▀  D E F A U L T
-
-▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-*/
-
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 #include "totem.h"
@@ -26,7 +13,6 @@
 
 enum totem_layers {
     _QWERTY,
-    _COLEMAK,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -37,7 +23,6 @@ enum totem_layers {
 // └─────────────────────────────────────────────────┘
 
 enum custom_keycodes {
-    COLEMAK = SAFE_RANGE,
     QWERTY,
     LOWER,
     RAISE,
@@ -64,22 +49,6 @@ enum custom_keycodes {
 #define CTL_K MT(MOD_LCTL, KC_K)
 #define ALT_L MT(MOD_LALT, KC_L)
 #define GUI_S MT(MOD_LGUI, KC_SCLN)
-
-
-// LEFT HAND HOME ROW MODS COLEMAK ├─────────────────┐
-
-#define GUI_A MT(MOD_LGUI, KC_A)
-#define ALT_R MT(MOD_LALT, KC_R)
-#define CTL_S MT(MOD_LCTL, KC_S)
-#define SHT_T MT(MOD_LSFT, KC_T)
-
-// RIGHT HAND HOME ROW MODS COLEMAK ├────────────────┐
-
-#define SHT_N MT(MOD_RSFT, KC_N)
-#define CTL_E MT(MOD_LCTL, KC_E)
-#define ALT_I MT(MOD_LALT, KC_I)
-#define GUI_O MT(MOD_LGUI, KC_O)
-
 
 
 
@@ -114,31 +83,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
               GUI_A,    ALT_S,    CTL_D,    SHT_F,    KC_G,      KC_H,     SHT_J,    CTL_K,    ALT_L,    GUI_S,
     KC_Q,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,      KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_P,
-                                  KC_DEL,   LOWER,    KC_SPC,    KC_ENT,   RAISE,    KC_BSPC
- ),
-
-/*
-
-   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
-
-   ┌─────────────────────────────────────────────────┐
-   │ c o l e m a k                                   │      ╭╮╭╮╭╮╭╮
-   └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
-             ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
-     ╌┄┈┈───═╡    Q    │    W    │    F    │    P    │    G    ││    J    │    L    │    U    │    Y    │    ;    │
-             ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
-             │    A    │    R    │    S    │    T    │    D    ││    H    │    N    │    E    │    I    │    O    │
-   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │    Q    │    Z    │    X    │    C    │    V    │    B    ││    K    │    M    │    ,    │    .    │    /    │    ;    │
-   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │   DEL   │  LOWER  │  SPACE  ││  ENTER  │  RAISE  │  BSPC   │
-                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘*/
-
-   [_COLEMAK] = LAYOUT(
- //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
-              KC_Q,     KC_W,     KC_F,     KC_P,     KC_G,      KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,
-              GUI_A,    ALT_R,    CTL_S,    SHT_T,    KC_D,      KC_H,     SHT_N,    CTL_E,    ALT_I,    GUI_O,
-    KC_Q,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,      KC_K,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_SCLN,
                                   KC_DEL,   LOWER,    KC_SPC,    KC_ENT,   RAISE,    KC_BSPC
  ),
 
@@ -304,24 +248,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
-/*
-  ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
-
-
-                                                          ██████
-                                                            ██  ▄▄▄▄
-                                                            ██ ██▀▀██
-                                                            ▀▀ ██▄▄██
-                                                        ██████  ▀▀▀▀
-                                                          ██ ▄▄▄▄▄▄
-                                                          ██ ██▀▀▀▀
-                                                          ██ ██████
-                                                             ██▄▄▄▄
-                                                             ▀▀▀▀▀▀
-                                                           ████████
-                                                           ██ ██ ██
-                                                           ██ ██ ██
-                                                           ▀▀ ▀▀ ▀▀
-                                                          ████████
-
-*/
