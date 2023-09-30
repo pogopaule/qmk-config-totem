@@ -143,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
              │ DEBUG   │ QWERTY  │         │         │         ││         │   F4    │   F5    │   F6    │   F11   │
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │  MAKE   │ OS SWAP │ COLEMAK │         │         │         ││         │   F1    │   F2    │   F3    │   F10   │   F13   │
+   │  MAKE   │ OS SWAP │         │         │         │         ││         │   F1    │   F2    │   F3    │   F10   │   F13   │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                  │    ▼    │    ▼    │    ▼    ││    ▼    │    ▼    │    ▼    │
                                  └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
               QK_BOOT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12,
               DB_TOGG,  QWERTY,   XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F11,
-    MAKE_H,   OS_SWAP,  COLEMAK,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F10,   KC_F13,
+    MAKE_H,   OS_SWAP,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F10,   KC_F13,
                                   _______,  _______,  _______,   _______,  _______,  _______
  )
 /*
@@ -210,11 +210,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // │ l a y e r                                       │
 // └─────────────────────────────────────────────────┘
 
-        case COLEMAK:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_COLEMAK);
-            }
-            return false;
         case QWERTY:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_QWERTY);
