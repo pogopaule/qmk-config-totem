@@ -14,6 +14,9 @@
 enum totem_layers {
     _QWERTY,
     _NUM,
+    _SYM,
+    _NAV,
+    _WINDOW,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -26,6 +29,9 @@ enum totem_layers {
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     NUM,
+    SYM,
+    NAV,
+    WINDOW,
     LOWER,
     RAISE,
     ADJUST,
@@ -53,8 +59,10 @@ enum custom_keycodes {
 #define GUI_S MT(MOD_LGUI, KC_SCLN)
 
 
-
 #define NUM LT(_NUM, KC_BSPC)
+#define SYM LT(_SYM, KC_ENT)
+#define NAV LT(_NAV, KC_SPC)
+#define WINDOW LT(_WINDOW, KC_TAB)
 #define RAISE LT(_RAISE, KC_ESC)
 #define ADJUST MO(_ADJUST)
 
@@ -75,17 +83,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
              │    A    │    S    │    D    │    F    │    G    ││    H    │    J    │    K    │    L    │    ;    │
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │    Q    │    Z    │    X    │    C    │    V    │    B    ││    N    │    M    │    ,    │    .    │    /    │    P    │
+   │    Q    │    Z    │    X    │    C    │    V    │    B    ││    N    │    M    │    ,    │    .    │    /    │    '    │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │  ESC    │  SPACE  │  TAB    ││  ENTER  │   NUM   │  DEL    │
+                                 │  ESC    │   NAV   │ WINDOW  ││   SYM   │   NUM   │  DEL    │
                                  └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘*/
 
    [_QWERTY] = LAYOUT(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
               KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
               GUI_A,    ALT_S,    CTL_D,    SHT_F,    KC_G,      KC_H,     SHT_J,    CTL_K,    ALT_L,    GUI_S,
-    KC_Q,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,      KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_P,
-                                  KC_ESC,   KC_SPC,   KC_TAB,    KC_ENT,   NUM,      KC_DEL
+    KC_Q,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,      KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_QUOT,
+                                  KC_ESC,   NAV,      WINDOW,    SYM,      NUM,      KC_DEL
  ),
 
  /*
@@ -110,6 +118,78 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_SCLN,  KC_P4,    KC_P5,    KC_P6,    KC_EQL,    XXXXXXX,  MOD_RSFT, MOD_RCTL, MOD_RALT, MOD_RGUI,
     XXXXXXX,  KC_GRV,   KC_P1,    KC_P2,    KC_P3,    KC_SLSH,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
                                   KC_DOT,   KC_P0,    KC_MINS,   XXXXXXX,  XXXXXXX,  XXXXXXX
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌─────────────────────────────────────────────────┐
+   │ s y m                                           │      ╭╮╭╮╭╮╭╮
+   └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
+             ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
+     ╌┄┈┈───═╡    {    │    &    │    *    │    (    │    }    ││         │         │         │         │         │
+             ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
+             │    :    │    $    │    %    │    ^    │    +    ││         │  SHIFT  │  CTRL   │   ALT   │   GUI   │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │         │    ~    │    !    │    @    │    #    │    |    ││         │         │         │         │         │         │
+   └─────────┴─────────┼─────────┼─────────┼─────────┴─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │    (    │    )    │    _    ││         │         │         │
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
+
+   [_SYM] = LAYOUT(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
+              KC_LCBR,  KC_AMPR,  KC_PAST,  KC_LPRN,  KC_RCBR,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+              KC_COLN,  KC_DLR,   KC_PERC,  KC_CIRC,  KC_PPLS,   XXXXXXX,  MOD_RSFT, MOD_LCTL, MOD_LALT, MOD_LGUI,
+    XXXXXXX,  KC_GRV,   KC_EXLM,  KC_AT,    KC_HASH,  KC_PIPE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                  KC_LPRN,  KC_RPRN,  KC_UNDS,   XXXXXXX,  XXXXXXX,  XXXXXXX
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌─────────────────────────────────────────────────┐
+   │ n a v                                           │      ╭╮╭╮╭╮╭╮
+   └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
+             ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
+     ╌┄┈┈───═╡         │         │         │         │         ││         │         │         │         │         │
+             ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
+             │   GUI   │   ALT   │  CTRL   │  SHIFT  │         ││   ←     │    ↓    │   ↑     │   →     │         │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │         │         │         │         │         │         ││  HOME   │   PG↓   │  PG↑    │   END   │         │         │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │         │         │         ││         │         │         │
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
+
+   [_NAV] = LAYOUT(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
+              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+              MOD_LGUI, MOD_LALT, MOD_LCTL, MOD_LSFT, XXXXXXX,   KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   XXXXXXX,  XXXXXXX,
+                                  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌─────────────────────────────────────────────────┐
+   │ w i n d o w                                     │      ╭╮╭╮╭╮╭╮
+   └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
+             ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
+     ╌┄┈┈───═╡         │         │         │         │         ││ ← TAB   │         │  +TAB   │  TAB→   │         │
+             ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
+             │         │         │         │         │         ││ ← SCR   │         │         │  SCR→   │         │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │         │         │         │         │         │         ││ ← TMUX  │         │CLS WNDW │ TMUX→   │         │         │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │         │         │         ││         │         │         │
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
+
+   [_WINDOW] = LAYOUT(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
+              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   G(A(KC_LEFT)),XXXXXXX,G(KC_T),G(A(KC_RIGHT)),XXXXXXX,
+              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   C(S(KC_LEFT)),XXXXXXX,XXXXXXX,C(S(KC_RIGHT)),XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  G(KC_W),  XXXXXXX,   XXXXXXX, XXXXXXX,
+                                  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX
  ),
 
  /*
